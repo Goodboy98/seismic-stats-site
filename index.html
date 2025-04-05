@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seismic Stats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #0f0f0f;
+      color: #f1f1f1;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    h1, h2, h3 {
+      color: #00ffe0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: #1c1c1c;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0, 255, 224, 0.2);
+      margin-bottom: 2rem;
+    }
+    .roles-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .roles-table th, .roles-table td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #333;
+      text-align: left;
+    }
+    .last-updated {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Seismic Discord Статистика</h1>
+
+    <div class="card">
+      <h2>📈 Розмір Discord-серверу</h2>
+      <p id="serverSize">Завантаження...</p>
+    </div>
+
+    <div class="card">
+      <h2>🧮 Ролі Magnitude</h2>
+      <table class="roles-table" id="rolesTable">
+        <thead>
+          <tr>
+            <th>Рівень</th>
+            <th>Макс. дозволено</th>
+            <th>Вже видано</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>💡 Як отримати роль</h2>
+      <ul>
+        <li>📣 Підтримка проєкту у X (Twitter)</li>
+        <li>💬 Якісне спілкування в чатах</li>
+        <li>🎯 Участь у челенджах (оновлення щопонеділка)</li>
+        <li>🎉 Участь в івентах: вікторини, покер, караоке</li>
+      </ul>
+      <p>Ролі видаються щоп’ятниці вручну модераторами на основі якості внеску, а не кількості.</p>
+    </div>
+
+    <div class="card">
+      <h2>📅 Розклад подій</h2>
+      <ul id="eventSchedule">
+        <li>Понеділок: Вікторина</li>
+        <li>Середа: Вайлдкард подія</li>
+        <li>Пʼятниця: Покер</li>
+      </ul>
+    </div>
+
+    <p class="last-updated">Останнє оновлення: 5 квітня 2025</p>
+  </div>
+
+  <script>
+    // Тестові дані (заміни на fetch з JSON/API у майбутньому)
+    const serverSize = 51234;
+    const rolesData = [
+      { level: "Mag 1.0", max: 900, given: 300 },
+      { level: "Mag 2.0", max: 450, given: 130 },
+      { level: "Mag 3.0", max: 225, given: 90 },
+      { level: "Mag 4.0", max: 112, given: 45 },
+      { level: "Mag 5.0", max: 56, given: 20 },
+      { level: "Mag 6.0", max: 28, given: 10 },
+      { level: "Mag 7.0", max: 14, given: 5 },
+      { level: "Mag 8.0", max: 7, given: 3 },
+      { level: "Mag 9.0", max: 3, given: 1 }
+    ];
+
+    document.getElementById("serverSize").textContent = `${serverSize.toLocaleString()} учасників`;
+
+    const tbody = document.querySelector("#rolesTable tbody");
+    rolesData.forEach(role => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${role.level}</td>
+        <td>${role.max}</td>
+        <td>${role.given}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
